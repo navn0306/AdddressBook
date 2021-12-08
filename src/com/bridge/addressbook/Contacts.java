@@ -10,7 +10,7 @@ public class Contacts {
         Scanner c = new Scanner(System.in);
         int ch;
         System.out.println("To enter a record press 1 \nTo display records press 2\n" +
-                "To delete a record press 3\n" +
+                "To Update a record press 3\n" + "To delete a record press 4\n "+
                 " 0 to exit");
         ch = c.nextInt();
         while (ch != 0) {
@@ -44,6 +44,7 @@ public class Contacts {
                         System.out.println(add);
                     }
                     break;
+
                 case 3:
                     boolean found = false;
                     System.out.println("Enter first name of contact to update ");
@@ -81,10 +82,30 @@ public class Contacts {
                         System.out.println("Record Updated successfully");
                     }
                     break;
+                case 4:
+                    found = false;
+                    System.out.println("Enter fname to delete ");
+                    fname = sc.nextLine();
+                    System.out.println(" Contacts ");
+                    i = a.iterator();
+                    while (i.hasNext()) {
+                        AddressBook add = i.next();
+                        if (add.getfName().equals(fname)) {
+                            i.remove();
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Not found");
+                    } else {
+                        System.out.println("Record deleted successfully");
+                    }
+                    break;
             }
 
             System.out.println("To enter a record press 1 \nTo display records press 2\n" +
-                    "To Update a record press 3\n" +
+                    "To Update a record press 3\n" + "To delete a record press 4\n "+
                     " 0 to exit");
             ch = c.nextInt();
         }

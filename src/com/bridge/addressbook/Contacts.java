@@ -1,114 +1,48 @@
 package com.bridge.addressbook;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Contacts {
-    public static void main(String[] args) {
 
-        List<AddressBook> a = new ArrayList<>();
+    public static ArrayList<Operations> contactBookOptions() {
+
+        Operations oprations = new Operations();
+
+        ArrayList<Operations> operations = new ArrayList<>();
+        String name;
         Scanner sc = new Scanner(System.in);
-        Scanner c = new Scanner(System.in);
-        int ch;
-        System.out.println("To enter a record press 1 \nTo display records press 2\n" +
-                "To Update a record press 3\n" + "To delete a record press 4\n "+
-                " 0 to exit");
-        ch = c.nextInt();
+        int ch = 1;
+
+
         while (ch != 0) {
+            System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 \nTo display contact enter 1" + "\nTo Exit enter 0");
+            ch = sc.nextInt();
+
             switch (ch) {
-
                 case 1:
-                    System.out.println("Enter Fname - ");
-                    String fname = sc.nextLine();
-                    System.out.println("Enter lname - ");
-                    String lname = sc.nextLine();
-                    System.out.println("Enter address - ");
-                    String address = sc.nextLine();
-                    System.out.println("Enter city - ");
-                    String city = sc.nextLine();
-                    System.out.println("Enter state - ");
-                    String state = sc.nextLine();
-                    System.out.println("Enter email - ");
-                    String email = sc.nextLine();
-                    System.out.println("Enter number - ");
-                    String number = sc.nextLine();
-                    System.out.println("Enter zip - ");
-                    String zip = sc.nextLine();
-
-                    a.add(new AddressBook(fname, lname, address, city, state, email, number, zip));
+                    operations.add(Operations.getInput());
                     break;
                 case 2:
-                    System.out.println(" Contacts ");
-                    Iterator<AddressBook> i = a.iterator();
-                    while (i.hasNext()) {
-                        AddressBook add = i.next();
-                        System.out.println(add);
-                    }
+                    System.out.println("Enter first name that you want to edit contactDetails");
+                    name = sc.next();
+                    oprations.updateData(name, operations);
                     break;
-
                 case 3:
-                    boolean found = false;
-                    System.out.println("Enter first name of contact to update ");
-                    fname = sc.nextLine();
-
-                    ListIterator<AddressBook> li = a.listIterator();
-                    while (li.hasNext()) {
-                        AddressBook add = li.next();
-                        if (add.getfName().equals(fname)) {
-                            System.out.println("Enter the new contact details");
-                            System.out.println("Enter Fname - ");
-                            String newFname = sc.nextLine();
-                            System.out.println("Enter lname - ");
-                            String newLname = sc.nextLine();
-                            System.out.println("Enter address - ");
-                            String newAddress = sc.nextLine();
-                            System.out.println("Enter city - ");
-                            String newCity = sc.nextLine();
-                            System.out.println("Enter state - ");
-                            String newState = sc.nextLine();
-                            System.out.println("Enter email - ");
-                            String newEmail = sc.nextLine();
-                            System.out.println("Enter number - ");
-                            String newNumber = sc.nextLine();
-                            System.out.println("Enter zip - ");
-                            String newzip = sc.nextLine();
-                            li.set(new AddressBook(newFname, newLname, newAddress, newCity, newState, newEmail, newNumber, newzip));
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        System.out.println("Not found");
-                    } else {
-                        System.out.println("Record Updated successfully");
-                    }
+                    System.out.println("Enter the first name that you want to delete Contact details ");
+                    name = sc.next();
+                    oprations.deleteRecord(name, operations);
                     break;
                 case 4:
-                    found = false;
-                    System.out.println("Enter fname to delete ");
-                    fname = sc.nextLine();
-                    System.out.println(" Contacts ");
-                    i = a.iterator();
-                    while (i.hasNext()) {
-                        AddressBook add = i.next();
-                        if (add.getfName().equals(fname)) {
-                            i.remove();
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        System.out.println("Not found");
-                    } else {
-                        System.out.println("Record deleted successfully");
-                    }
+                    System.out.println("contactDetails : " + operations.size());
+                    oprations.addressBook(operations);
                     break;
+                default:
+                    System.out.println("Enter correct option");
+                    break;
+
             }
-
-            System.out.println("To enter a record press 1 \nTo display records press 2\n" +
-                    "To Update a record press 3\n" + "To delete a record press 4\n "+
-                    " 0 to exit");
-            ch = c.nextInt();
         }
-
+        return operations;
     }
 }

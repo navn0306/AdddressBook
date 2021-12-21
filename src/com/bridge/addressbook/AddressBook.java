@@ -7,8 +7,7 @@ import java.util.Scanner;
 
 public class AddressBook {
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book");
-        Map<String, ArrayList<Contacts>> addressHashMap = new HashMap();
+        Map<String, ArrayList<Contacts>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
         String bookName;
@@ -22,24 +21,24 @@ public class AddressBook {
                 case 1:
                     System.out.println("Please Enter the Address book Name");
                     bookName = sc.next();
-                    addressHashMap.put(bookName, null);
+                    hashMap.put(bookName, null);
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
                     bookName = sc.next();
                     arrayList = Contacts.contactBookOptions();
-                    ArrayList temp = addressHashMap.get(bookName);
+                    ArrayList temp = hashMap.get(bookName);
                     if (temp != null) {
                         arrayList.add(temp);
 
                     }
-                    addressHashMap.put(bookName, arrayList);
+                    hashMap.put(bookName, arrayList);
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
                     bookName = sc.next();
-                    if (addressHashMap.containsKey(bookName)) {
-                        addressHashMap.remove(bookName);
+                    if (hashMap.containsKey(bookName)) {
+                        hashMap.remove(bookName);
                     } else {
                         System.out.println("No such Book Found, Please enter a Valid AddressBook name");
                     }
@@ -47,8 +46,8 @@ public class AddressBook {
                 case 4:
                     System.out.println("Address Bool List");
 
-                    for (String name : addressHashMap.keySet()) {
-                        String value = addressHashMap.get(name).toString();
+                    for (String name : hashMap.keySet()) {
+                        String value = hashMap.get(name).toString();
                         System.out.println(name + " --> " + value);
                     }
                     break;

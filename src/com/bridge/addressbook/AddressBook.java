@@ -10,35 +10,36 @@ public class AddressBook {
         Map<String, ArrayList<Contacts>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
-        String bookName;
+        String addressbook;
         int ch = 1;
 
-        while (ch!=0) {
-            System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3\nTo Display AddressBook enter 4" +
-                    "\nTo Exit enter 0");
+        while (ch != 0) {
+            System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
+                    "\nTo Display AddressBook enter 4");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Please Enter the Address book Name");
-                    bookName = sc.next();
-                    hashMap.put(bookName, null);
+                    addressbook = sc.next();
+
+                    hashMap.put(addressbook, null);
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
-                    bookName = sc.next();
+                    addressbook = sc.next();
                     arrayList = Contacts.contactBookOptions();
-                    ArrayList temp = hashMap.get(bookName);
+                    ArrayList temp = hashMap.get(addressbook);
                     if (temp != null) {
                         arrayList.add(temp);
 
                     }
-                    hashMap.put(bookName, arrayList);
+                    hashMap.put(addressbook, arrayList);
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
-                    bookName = sc.next();
-                    if (hashMap.containsKey(bookName)) {
-                        hashMap.remove(bookName);
+                    addressbook = sc.next();
+                    if (hashMap.containsKey(addressbook)) {
+                        hashMap.remove(addressbook);
                     } else {
                         System.out.println("No such Book Found, Please enter a Valid AddressBook name");
                     }

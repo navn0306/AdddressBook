@@ -12,7 +12,7 @@ public class AddressBook {
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
         String bookName;
-        boolean flag = true;
+        int ch =1;
 
         while (flag) {
             System.out.println("--------------------------------------------");

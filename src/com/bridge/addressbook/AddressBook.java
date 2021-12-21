@@ -12,10 +12,9 @@ public class AddressBook {
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
         String bookName;
-        boolean flag = true;
+        int ch = 1;
 
-        while (flag) {
-            System.out.println("--------------------------------------------");
+        while (ch!=0) {
             System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3\nTo Display AddressBook enter 4" +
                     "\nTo Exit enter 0");
             int choice = sc.nextInt();
@@ -52,9 +51,6 @@ public class AddressBook {
                         String value = addressHashMap.get(name).toString();
                         System.out.println(name + " --> " + value);
                     }
-                    break;
-                case 0:
-                    flag = false;
                     break;
                 default:
                     System.out.println("Please enter valid input");

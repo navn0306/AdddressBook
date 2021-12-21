@@ -16,7 +16,7 @@ public class Contacts {
 
 
         while (ch != 0) {
-            System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 \nTo display contact enter 1" + "\nTo Exit enter 0");
+            System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 \nTo display contact enter 1");
             ch = sc.nextInt();
 
             switch (ch) {

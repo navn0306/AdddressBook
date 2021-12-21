@@ -7,40 +7,40 @@ import java.util.Scanner;
 
 public class AddressBook {
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book");
-        Map<String, ArrayList<Contacts>> addressHashMap = new HashMap();
+        Map<String, ArrayList<Contacts>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
-        String bookName;
-        int ch =1;
+        String addressbook;
+        int ch = 1;
 
-        while (flag) {
-            System.out.println("--------------------------------------------");
-            System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3\nTo Display AddressBook enter 4" +
-                    "\nTo Exit enter 0");
+
+        while (ch != 0) {
+            System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
+                    "\nTo Display AddressBook enter 4");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Please Enter the Address book Name");
-                    bookName = sc.next();
-                    addressHashMap.put(bookName, null);
+                    addressbook = sc.next();
+
+                    hashMap.put(addressbook, null);
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
-                    bookName = sc.next();
+                    addressbook = sc.next();
                     arrayList = Contacts.contactBookOptions();
-                    ArrayList temp = addressHashMap.get(bookName);
+                    ArrayList temp = hashMap.get(addressbook);
                     if (temp != null) {
                         arrayList.add(temp);
 
                     }
-                    addressHashMap.put(bookName, arrayList);
+                    hashMap.put(addressbook, arrayList);
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
-                    bookName = sc.next();
-                    if (addressHashMap.containsKey(bookName)) {
-                        addressHashMap.remove(bookName);
+                    addressbook = sc.next();
+                    if (hashMap.containsKey(addressbook)) {
+                        hashMap.remove(addressbook);
                     } else {
                         System.out.println("No such Book Found, Please enter a Valid AddressBook name");
                     }
@@ -48,13 +48,10 @@ public class AddressBook {
                 case 4:
                     System.out.println("Address Bool List");
 
-                    for (String name : addressHashMap.keySet()) {
-                        String value = addressHashMap.get(name).toString();
+                    for (String name : hashMap.keySet()) {
+                        String value = hashMap.get(name).toString();
                         System.out.println(name + " --> " + value);
                     }
-                    break;
-                case 0:
-                    flag = false;
                     break;
                 default:
                     System.out.println("Please enter valid input");

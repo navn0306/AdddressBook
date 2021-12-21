@@ -2,7 +2,7 @@
 Welcome to Address Book Program.
 
 UseCase1-
-Ability to create a Contacts in AddressBook with first and last names, address, city, state, zip, phone number and email...
+Ability to create a Contacts in AddressBook with first and last names, address, city, state, zip, phone number and email.
 
 
 UseCase2-

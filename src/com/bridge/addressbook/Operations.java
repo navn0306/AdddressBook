@@ -28,18 +28,22 @@ public class Operations {
         for (int i = 0; i < contactDetails.size(); i++) {
             if (name.equals(contactDetails.get(i).fName)) {
                 contactDetails.remove(i);
-                contactDetails.add(i, getInput());
+                contactDetails.add(i, read(contactDetails));
             }
         }
         System.out.println("Record Update Successfully");
     }
 
-    public static Operations getInput() {
+    public static Operations read(ArrayList<Operations> operations) {
+
         Operations contactPersonDetails = new Operations();
         Scanner sc = new Scanner(System.in);
         System.out.print("First Name : ");
         contactPersonDetails.fName = sc.next();
-
+        if (operations.stream().filter(name -> name.fName.equals(contactPersonDetails.fName)).count() > 0) {
+            System.out.println("Contact already exists");
+            return new Operations();
+        }
         System.out.print("Last Name : ");
         contactPersonDetails.lName = sc.next();
 
@@ -48,9 +52,6 @@ public class Operations {
 
         System.out.print("City Name : ");
         contactPersonDetails.city = sc.next();
-
-        System.out.print("Name : ");
-        contactPersonDetails.state = sc.next();
 
         System.out.print("Email : ");
         contactPersonDetails.email = sc.next();
@@ -74,9 +75,4 @@ public class Operations {
         System.out.println("Record Delete Successfully");
     }
 
-    public void getAddressbook(Map<String, Operations> addressBookHashMap) {
-        for (String addressbook : addressBookHashMap.keySet()) {
-            System.out.println("Person contact for the " + addressbook + " is " + addressBookHashMap.get(addressbook).toString());
-        }
-    }
 }

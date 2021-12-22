@@ -16,12 +16,15 @@ public class Contacts {
 
 
         while (ch != 0) {
-            System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 \nTo display contact enter 1");
+            System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 \nTo display contact enter 4");
             ch = sc.nextInt();
 
             switch (ch) {
                 case 1:
-                    operations.add(Operations.getInput());
+                    Operations operations1 = Operations.read(operations);
+                    if (operations1.fName != null) {
+                        operations.add(operations1);
+                    }
                     break;
                 case 2:
                     System.out.println("Enter first name that you want to edit contactDetails");

@@ -30,9 +30,9 @@ public class Operations {
         }
         System.out.println("Record Update Successfully");
     }
-
+  
 //To read the data from console
-    public static Operations read() {
+public static Operations read() {
 
         Operations contactPersonDetails = new Operations();
         Scanner sc = new Scanner(System.in);

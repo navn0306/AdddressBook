@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AddressBook {
     public static void main(String[] args) {
-        Map<String, ArrayList<Contacts>> hashMap = new HashMap();
+        Map<String, ArrayList<Operations>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
         String addressbook;
@@ -16,23 +16,21 @@ public class AddressBook {
 
         while (ch != 0) {
             System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
-                    "\nTo Display AddressBook enter 4");
+                    "\nTo Display AddressBook enter 4\nTo Search enter 5");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Please Enter the Address book Name");
                     addressbook = sc.next();
-
-                    hashMap.put(addressbook, null);
+                    hashMap = new HashMap<>();
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
                     addressbook = sc.next();
-                    arrayList = Contacts.contactBookOptions();
+                    arrayList = Contacts.addressBook();
                     ArrayList temp = hashMap.get(addressbook);
                     if (temp != null) {
                         arrayList.add(temp);
-
                     }
                     hashMap.put(addressbook, arrayList);
                     break;
@@ -46,12 +44,15 @@ public class AddressBook {
                     }
                     break;
                 case 4:
-                    System.out.println("Address Bool List");
-
+                    System.out.println("Address List");
                     for (String name : hashMap.keySet()) {
                         String value = hashMap.get(name).toString();
                         System.out.println(name + " --> " + value);
                     }
+                    break;
+                case 5:
+                    System.out.print("Enter city name : ");
+                    Operations.search((new Scanner(System.in).next()), hashMap);
                     break;
                 default:
                     System.out.println("Please enter valid input");

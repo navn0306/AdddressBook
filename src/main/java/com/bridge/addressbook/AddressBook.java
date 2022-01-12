@@ -1,6 +1,13 @@
 package com.bridge.addressbook;
 
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +19,7 @@ import static com.bridge.addressbook.Operations.cityStateWiseData;
 public class AddressBook {
     private static final String PATH = "C:\\Users\\Navneet\\Documents\\OOPs\\AddressBook\\src\\main\\resources";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Map<String, ArrayList<Operations>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
@@ -39,13 +46,8 @@ public class AddressBook {
                     if (temp != null) {
                         arrayList.add(temp);
                     }
-                    Path fileName = Paths.get(PATH + "/" + addressbook + ".txt");
-                    System.out.println(fileName);
-                    if (Files.notExists(fileName)) {
-                        Files.createFile(fileName);
-                        List<String> list = Arrays.asList(arrayList.toString());
-                        Files.write(fileName, list, StandardOpenOption.APPEND);
-                    }
+                    writeDataIntoFileNio(addressbook, arrayList);
+                    writeAddressBookIntoCsvFile(addressbook, arrayList);
                     hashMap.put(addressbook, arrayList);
                     break;
                 case 3:
@@ -100,6 +102,30 @@ public class AddressBook {
                     System.out.println("Please enter valid input");
             }
         }
+    }
+
+    public static void writeDataIntoFileNio(String addressBookName, ArrayList arrayList) throws IOException {
+        Path fileName = Paths.get(PATH + "/" + addressBookName + ".txt");
+        System.out.println(fileName);
+        if (Files.notExists(fileName)) {
+            Files.createFile(fileName);
+            List<String> s = Arrays.asList(arrayList.toString());
+            Files.write(fileName, s, StandardOpenOption.APPEND);
+        }
+    }
+
+    private static void writeAddressBookIntoCsvFile(String addressBookName, ArrayList arrayList) throws IOException,
+
+            CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        Path csvFile = Paths.get(PATH + "/" + addressBookName + ".csv");
+        Writer writer = Files.newBufferedWriter(csvFile);
+        StatefulBeanToCsv<Operations> beanToCSV = new StatefulBeanToCsvBuilder<Operations>(writer)
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
+        for (Object cp : arrayList) {
+            beanToCSV.write((Operations) cp);
+        }
+        writer.close();
+
     }
 }
 

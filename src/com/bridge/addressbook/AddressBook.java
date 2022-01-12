@@ -1,9 +1,6 @@
 package com.bridge.addressbook;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.bridge.addressbook.Operations.cityStateWiseData;
 
@@ -18,7 +15,8 @@ public class AddressBook {
 
         while (ch != 0) {
             System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
-                    "\nTo Display AddressBook enter 4\nTo Search enter 5\nTo get City wise data");
+                    "\nTo Display AddressBook enter 4\nTo Search enter 5\nTo get City wise data\n6 - State wise data " +
+                    "\nTo find the count of Contacts enter 7\nTo sort a addressBook enter 8");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
@@ -68,6 +66,14 @@ public class AddressBook {
                     System.out.print("Enter City or State name : ");
                     Operations numberOfContact = new Operations((new Scanner(System.in).next()), hashMap);
                     System.out.println("Total number of contact in given City is : " + numberOfContact);
+                    break;
+                case 8:
+                    System.out.println("Enter the Book Name ; ");
+                    String book = sc.next();
+                    Operations sort = new Operations((new Scanner(System.in).next()), hashMap);
+                    List<Operations> contacts = hashMap.get(book);
+                    sort.sortContacts(contacts);
+                    break;
                 default:
                     System.out.println("Please enter valid input");
             }

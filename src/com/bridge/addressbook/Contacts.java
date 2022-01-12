@@ -9,7 +9,7 @@ public class Contacts {
         Operations operations = new Operations();
         String name;
         Scanner sc = new Scanner(System.in);
-        int ch = 1;
+       int ch = 1;
         while (ch != 0) {
             System.out.print(" To Add contact enter 1 \nTo Edit contact enter 2 \nTo Delete contact enter 1 " +
                     "\nTo display contact enter 4\nTo exit enter 0");

@@ -1,11 +1,18 @@
 package com.bridge.addressbook;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 import static com.bridge.addressbook.Operations.cityStateWiseData;
 
 public class AddressBook {
-    public static void main(String[] args) {
+    private static final String PATH = "C:\\Users\\Navneet\\Documents\\OOPs\\AddressBook\\src\\main\\resources";
+
+    public static void main(String[] args) throws IOException {
         Map<String, ArrayList<Operations>> hashMap = new HashMap();
         ArrayList arrayList;
         Scanner sc = new Scanner(System.in);
@@ -31,6 +38,13 @@ public class AddressBook {
                     ArrayList temp = hashMap.get(addressbook);
                     if (temp != null) {
                         arrayList.add(temp);
+                    }
+                    Path fileName = Paths.get(PATH + "/" + addressbook + ".txt");
+                    System.out.println(fileName);
+                    if (Files.notExists(fileName)) {
+                        Files.createFile(fileName);
+                        List<String> list = Arrays.asList(arrayList.toString());
+                        Files.write(fileName, list, StandardOpenOption.APPEND);
                     }
                     hashMap.put(addressbook, arrayList);
                     break;

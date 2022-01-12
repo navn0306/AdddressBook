@@ -35,3 +35,7 @@ Ability to get number of contact persons i.e. count by City or State.
 
 UseCase11 -
 Ability to sort the entries in the address book alphabetically by Person’s name.
+
+UseCase12 -
+Ability to sort the entries in the address book by City, State, or Zip.
+

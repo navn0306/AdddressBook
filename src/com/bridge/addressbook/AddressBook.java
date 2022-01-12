@@ -16,7 +16,7 @@ public class AddressBook {
         while (ch != 0) {
             System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
                     "\nTo Display AddressBook enter 4\nTo Search enter 5\nTo get City wise data\n6 - State wise data " +
-                    "\nTo find the count of Contacts enter 7\nTo sort a addressBook enter 8");
+                    "\nTo find the count of Contacts enter 7\nTo sort a addressBook enter 8\nTo sort the addressbook by city,state or zip enter 9");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
@@ -73,6 +73,14 @@ public class AddressBook {
                     Operations sort = new Operations((new Scanner(System.in).next()), hashMap);
                     List<Operations> contacts = hashMap.get(book);
                     sort.sortContacts(contacts);
+                    break;
+                case 9:
+                    System.out.println("Enter the Book Name : ");
+                    String bookName = sc.next();
+                    List<Operations> contact = hashMap.get(bookName);
+                    Operations sortContacts = new Operations();
+                    System.out.println("1- City \n2- Sate \n3- Zip");
+                    sortContacts.sortAddressBookCityStateZip(new Scanner(System.in).nextInt(), contact);
                     break;
                 default:
                     System.out.println("Please enter valid input");

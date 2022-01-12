@@ -122,6 +122,23 @@ public class Operations {
         }
     }
 
+    public static void sortAddressBookCityStateZip(int option, List<Operations> contact) {
+
+        List<Operations> listObject = null;
+        if (option == 1) {
+            listObject = contact.stream().sorted(Comparator.comparing(o -> o.city)).collect(Collectors.toList());
+        }
+        if (option == 2) {
+            listObject = contact.stream().sorted(Comparator.comparing(o -> o.state)).collect(Collectors.toList());
+        }
+        if (option == 3) {
+            listObject = contact.stream().sorted(Comparator.comparing(o -> o.zip)).collect(Collectors.toList());
+        }
+        for (Operations con : listObject) {
+            System.out.println(con);
+        }
+    }
+
     @Override
     public String toString() {
         return "Operations{" +

@@ -2,6 +2,7 @@ package com.bridge.addressbook;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Operations {
     String fName, lName, city, state, address, email, phoneNo, zip;
@@ -96,6 +97,7 @@ public class Operations {
                 });
     }
 
+    //To print citywise data
     static Map<String, Operations> cityStateWiseData(String cityStateName, Map<String, ArrayList<Operations>> addressBookHashMap) {
         Map<String, Operations> commonCityName = new HashMap<>();
 
@@ -109,6 +111,15 @@ public class Operations {
                     });
                 });
         return commonCityName;
+    }
+
+    //To print sorted contacts in addressbook
+    public static void sortContacts(List<Operations> contacts) {
+        List<Operations> listObject =
+                contacts.stream().sorted(Comparator.comparing(o -> o.fName)).collect(Collectors.toList());
+        for (Operations cp : listObject) {
+            System.out.println(cp);
+        }
     }
 
     @Override

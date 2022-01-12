@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static com.bridge.addressbook.Operations.cityStateWiseData;
+
 public class AddressBook {
     public static void main(String[] args) {
         Map<String, ArrayList<Operations>> hashMap = new HashMap();
@@ -16,7 +18,7 @@ public class AddressBook {
 
         while (ch != 0) {
             System.out.println("To Add AddressBook enter 1\nTo Edit AddressBook enter 2\nTo Delete AddressBook enter 3" +
-                    "\nTo Display AddressBook enter 4\nTo Search enter 5");
+                    "\nTo Display AddressBook enter 4\nTo Search enter 5\nTo get City wise data");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
@@ -54,6 +56,18 @@ public class AddressBook {
                     System.out.print("Enter city name : ");
                     Operations.search((new Scanner(System.in).next()), hashMap);
                     break;
+
+                case 6:
+                    System.out.print("Enter City or State name : ");
+                    Map<String, Operations> cityStateMap = cityStateWiseData((new Scanner(System.in).next()), hashMap);
+                    for (String cityCount : cityStateMap.keySet()) {
+                        System.out.println(cityCount + " - " + cityStateMap.get(cityCount));
+                    }
+                    break;
+                case 7:
+                    System.out.print("Enter City or State name : ");
+                    Operations numberOfContact = new Operations((new Scanner(System.in).next()), hashMap);
+                    System.out.println("Total number of contact in given City is : " + numberOfContact);
                 default:
                     System.out.println("Please enter valid input");
             }

@@ -1,9 +1,17 @@
 package com.bridge.addressbook;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Operations {
     String fName, lName, city, state, address, email, phoneNo, zip;
+
+    public Operations(String next, Map<String, ArrayList<Operations>> hashMap) {
+    }
+
+    public Operations() {
+
+    }
 
     public static void book(ArrayList<Operations> contactPerson) {
         int count = 1;
@@ -30,9 +38,9 @@ public class Operations {
         }
         System.out.println("Record Update Successfully");
     }
-  
-//To read the data from console
-public static Operations read() {
+
+    //To read the data from console
+    public static Operations read() {
 
         Operations contactPersonDetails = new Operations();
         Scanner sc = new Scanner(System.in);
@@ -48,6 +56,9 @@ public static Operations read() {
         System.out.print("City Name : ");
         contactPersonDetails.city = sc.next();
 
+        System.out.print("State Name : ");
+        contactPersonDetails.state = sc.next();
+
         System.out.print("Email : ");
         contactPersonDetails.email = sc.next();
 
@@ -59,7 +70,7 @@ public static Operations read() {
         return contactPersonDetails;
     }
 
-//To delete the entered contact
+    //To delete the entered contact
     public static void delete(String name, ArrayList<Operations> contactDetails) {
         if (contactDetails.size() > 0) {
             for (int i = 0; i < contactDetails.size(); i++) {
@@ -71,7 +82,7 @@ public static Operations read() {
         System.out.println("Record Delete Successfully");
     }
 
-//To search contact using city name
+    //To search contact using city name
     public static void search(String city, Map<String, ArrayList<Operations>> map) {
         map
                 .values()
@@ -83,6 +94,21 @@ public static Operations read() {
                                     System.out.println(person);
                             });
                 });
+    }
+
+    static Map<String, Operations> cityStateWiseData(String cityStateName, Map<String, ArrayList<Operations>> addressBookHashMap) {
+        Map<String, Operations> commonCityName = new HashMap<>();
+
+        AtomicInteger cityCounter = new AtomicInteger(1);
+        addressBookHashMap
+                .values()
+                .forEach(value -> {
+                    value.forEach(person -> {
+                        if (person.city.equals(cityStateName) || person.state.equals(cityStateName))
+                            commonCityName.put((cityCounter.getAndIncrement() + ""), person);
+                    });
+                });
+        return commonCityName;
     }
 
     @Override

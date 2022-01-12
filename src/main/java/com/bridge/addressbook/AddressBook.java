@@ -1,11 +1,13 @@
 package com.bridge.addressbook;
 
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -48,6 +50,7 @@ public class AddressBook {
                     }
                     writeDataIntoFileNio(addressbook, arrayList);
                     writeAddressBookIntoCsvFile(addressbook, arrayList);
+                    writeAddressBookIntoJSONFile(addressbook, arrayList);
                     hashMap.put(addressbook, arrayList);
                     break;
                 case 3:
@@ -125,7 +128,19 @@ public class AddressBook {
             beanToCSV.write((Operations) cp);
         }
         writer.close();
+    }
 
+    private static void writeAddressBookIntoJSONFile(String addressBookName, ArrayList arrayList) throws IOException {
+        String jsonFile = (PATH + "/" + addressBookName + ".json");
+        Gson gson = new Gson();
+        String json = gson.toJson(arrayList);
+
+        if (Files.notExists(Paths.get(jsonFile))) {
+            Files.createFile(Paths.get(jsonFile));
+            FileWriter writer = new FileWriter(jsonFile);
+            writer.write(json);
+            writer.close();
+        }
     }
 }
 

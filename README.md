@@ -20,3 +20,18 @@ Ability to add multiple person to Address Book.
 
 UseCase6-
 Refactor to add multiple Address Book to theSystem. Each Address Bookhas a unique Name.
+
+UseCase7-
+Ability to ensure there is no Duplicate Entry of the same Person in a particular Address Book.
+
+UseCase8 -
+Ability to search Person in a City or State across the multiple Address Book.
+
+UseCase9-
+Ability to view Persons by City or State.
+
+UseCase10 -
+Ability to get number of contact persons i.e. count by City or State.
+
+UseCase11 -
+Ability to sort the entries in the address book alphabetically by Person’s name.
